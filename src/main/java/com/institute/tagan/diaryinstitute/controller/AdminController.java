@@ -25,6 +25,7 @@ public class AdminController {
     // Внедрение сервиса при работе с сущностью кафедра
     @Autowired
     private DepartmentService serviceD;
+
     @GetMapping()
     public String  admin_main( Model model) {
         /*
