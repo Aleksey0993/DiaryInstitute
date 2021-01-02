@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/style_login.css">
+    <link rel="stylesheet" href="/css/style_header.css">
+
+    <style>
+    .menu ul li:nth-child(4){
+    border-bottom: 1px solid rgb(26, 122, 201);
+  }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="container">
+    <form class="login-form" method="POST" action="/login">
+        <h1>Вход в систему</h1>
+        <div class="form-input-material">
+            <input class="form-control-material"  name="username" type="text" autocomplete="off" placeholder="Введите логин"
+                   autofocus="true" required />
+        </div>
+        <div class="form-input-material">
+            <input class="form-control-material"  name="password" type="password" autocomplete="off" placeholder="Введите пароль" required />
+        </div>
+            <button type="submit" class="btn btn-primary btn-ghost">Войти</button>
+
+
+    </form>
+</div>
+
+</body>
+</html>
+
