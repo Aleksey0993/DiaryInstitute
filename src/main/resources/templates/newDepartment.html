@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создание новой кафедры</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/admin/departments}" th:object="${department}">
+    <label for="nameSh">Введите аббривиатуру кафедры</label>
+    <input type="text" th:field="*{nameSh}" id="nameSh">
+    <label for="nameL">Введите полное название кафедры</label>
+    <input type="text" th:field="*{nameL}" id="nameL">
+    <select th:field="*{primaryFaculty}">
+
+        <option th:each="faculty : ${faculties}"
+                th:value="${faculty.getId()}"
+                th:text="${faculty.getNameSh()}"/>
+    </select>
+
+
+    <input type="submit" value="Создать">
+
+</form>
+</body>
+</html>

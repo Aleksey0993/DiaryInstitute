@@ -1,0 +1,85 @@
+body {
+    min-height: 100vh;
+    background: linear-gradient(#141e30, #243b55);
+    color:white;
+}
+
+main{
+    padding:20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.parent_card{
+    display: flex;
+    justify-content: center;
+      align-items: center;
+    flex-wrap: wrap;
+    align-content:space-between;
+  }
+  .card{
+    flex-basis:20%;
+     flex-grow: 1;
+    text-align: center;
+    border:1px solid rgb(26, 122, 201);
+    margin:15px;
+    border-radius: 5px;
+    padding:30px;
+}
+.form_delete{
+    flex-grow: 1;
+    flex-basis: 40%;
+}
+.form_delete input{
+     width: 100%;
+    padding: 8px 15px;
+    color:rgb(26, 122, 201);
+    background: transparent;
+    border:1px solid  rgba(255, 255, 255, 0.2);
+    font-size: 16px;
+    border-radius: 8px;
+    
+}
+.edit_faculty{
+    padding: 8px 10px;
+    color:rgb(26, 122, 201);
+    text-decoration: none;
+    border:1px solid  rgba(255, 255, 255, 0.2);
+    font-size: 16px;
+    border-radius: 8px;
+    margin-right: 10px;
+     flex-grow: 1;
+     flex-basis: 40%;
+}
+
+.edit_faculty:hover {
+    border:1px solid  rgb(255, 255, 255);
+    box-shadow: 0 0 10px 5px rgba(51, 152, 219, 0.4);
+}
+.form_delete input:hover {
+    border:1px solid  rgb(255, 255, 255);
+    box-shadow: 0 0 10px 5px rgba(51, 152, 219, 0.4);
+}
+
+
+.edit_block{
+    width: 100%;
+    
+    display:flex;
+    justify-content: space-between;
+}
+.add_faculty{
+    padding: 8px 10px;
+    color:rgb(26, 122, 201);
+    text-decoration: none;
+    border:1px solid  rgb(255, 255, 255);
+    box-shadow: 0 0 10px 5px rgba(51, 152, 219, 0.4);
+    font-size: 16px;
+    border-radius: 8px;
+    position: fixed;
+    right:50px;
+    bottom: 50px;
+}
+.add_faculty:hover {
+    color:white;
+}
