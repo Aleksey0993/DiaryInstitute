@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Факультеты</title>
     <link rel="stylesheet" href="/css/normalize.css">
-
+    <link rel="stylesheet" href="/css/style_header.css">
     <link  type="text/css" rel="stylesheet" th:href="@{/css/style_faculties.css}"/>
+    <style>
+    .menu ul li:nth-child(4){
+    border-bottom: 1px solid rgb(26, 122, 201);
+  }
+    </style>
 </head>
 <body>
+<div th:replace="fragments/header :: header"/>
     <main>
 
         <h1>Факультеты института</h1>
@@ -31,6 +37,6 @@
 
 
     </main>
-    <a href="/admin/faculties/new" class="add_faculty">Добавить факультет</a>
+    <a href="/admin/faculties/new" class="add_but">Добавить факультет</a>
 </body>
 </html>

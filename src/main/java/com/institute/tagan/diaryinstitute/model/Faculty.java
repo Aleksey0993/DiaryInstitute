@@ -19,7 +19,8 @@ public class Faculty {
     private String nameSh;
     @Column(name="namel")
     private String nameL;
-    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "faculty_id")
     private Collection<Department> departments;
     public Faculty(){}
 

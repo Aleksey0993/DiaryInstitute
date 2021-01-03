@@ -2,8 +2,10 @@ package com.institute.tagan.diaryinstitute.controller;
 
 import com.institute.tagan.diaryinstitute.model.Department;
 import com.institute.tagan.diaryinstitute.model.Faculty;
+import com.institute.tagan.diaryinstitute.model.Speciality;
 import com.institute.tagan.diaryinstitute.service.DepartmentService;
 import com.institute.tagan.diaryinstitute.service.FacultyService;
+import com.institute.tagan.diaryinstitute.service.SpecialityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,6 +27,9 @@ public class AdminController {
     // Внедрение сервиса при работе с сущностью кафедра
     @Autowired
     private DepartmentService serviceD;
+    // Внедрение сервиса при работе с сущностью специальность
+    @Autowired
+    private SpecialityService serviceS;
 
     @GetMapping()
     public String  admin_main( Model model) {
@@ -84,7 +89,7 @@ public class AdminController {
     /// Конец работы со страницей факультеты
 
 
-    ////////// Начало работы со страницей факультеты
+    ////////// Начало работы со страницей кафедры
     @GetMapping("/departments")
     public String departments(Model model){
         model.addAttribute("departments", serviceD.getAllDepartments());
@@ -104,8 +109,6 @@ public class AdminController {
         serviceD.createDepartment(department);
         return "redirect:/admin/departments";
     }
-
-
 
     @GetMapping("/departments/{id}/edit")
     public String editDepartment(@PathVariable("id") Long id, Model model){
@@ -129,5 +132,57 @@ public class AdminController {
         serviceD.deleteDepartment(id);
         return "redirect:/admin/departments";
     }
+    /////////////////////////////////////////////////////////
+    /// Конец работы со страницей кафедры
+
+
+
+    ////////// Начало работы со страницей специальности
+    @GetMapping("/specialities")
+    public String specialities(Model model){
+        model.addAttribute("specialities", serviceS.getAllSpecialities());
+
+        return "speciality";
+    }
+
+    @GetMapping("/specialities/new")
+    public String newSpeciality(@ModelAttribute("speciality") Speciality speciality, Model model){
+        model.addAttribute("departments", serviceD.getAllDepartments());
+        return "newSpeciality";
+    }
+
+    @PostMapping("/specialities")
+    public String createSpeciality(@ModelAttribute("speciality") Speciality speciality){
+
+        serviceS.createSpeciality(speciality);
+        return "redirect:/admin/specialities";
+    }
+
+    @GetMapping("/specialities/{id}/edit")
+    public String editSpeciality(@PathVariable("id") Long id, Model model){
+        model.addAttribute("departments", serviceD.getAllDepartments());
+        Optional<Speciality> s = serviceS.getSpeciality(id);
+        if(s.isPresent()) {
+
+            model.addAttribute("speciality", s.get());
+        }
+        return "editSpeciality";
+    }
+    @PatchMapping("/specialities/{id}") //
+    public String updateSpeciality(@ModelAttribute("speciality") Speciality speciality){
+        serviceS.editSpeciality(speciality);
+
+        return "redirect:/admin/specialities";
+    }
+
+    @DeleteMapping("/specialities/{id}")
+    public String deleteSpeciality(@PathVariable("id") Long id){
+        serviceS.deleteSpeciality(id);
+        return "redirect:/admin/specialities";
+    }
+    /////////////////////////////////////////////////////////
+    /// Конец работы со страницей специальности
+
+
 
 }

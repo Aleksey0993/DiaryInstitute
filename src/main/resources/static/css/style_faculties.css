@@ -68,7 +68,7 @@ main{
     display:flex;
     justify-content: space-between;
 }
-.add_faculty{
+.add_but{
     padding: 8px 10px;
     color:rgb(26, 122, 201);
     text-decoration: none;
@@ -80,6 +80,6 @@ main{
     right:50px;
     bottom: 50px;
 }
-.add_faculty:hover {
+.add_but:hover {
     color:white;
 }

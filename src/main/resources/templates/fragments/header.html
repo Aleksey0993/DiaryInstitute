@@ -5,6 +5,10 @@
             <li><a href="/timetable">Расписание</a></li>
             <li><a href="/progress">Успеваемость</a></li>
             <li><a href="/login">Личный кабинет</a></li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Выйти</a></li>
+
+
+
         </ul>
     </nav>
 

@@ -4,20 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Изменение факультета</title>
+    <link  type="text/css" rel="stylesheet" th:href="@{/css/FormFacultyStyle.css}"/>
+    <style>
+        div>select{
+ padding: 5px 50px;
+    color:rgb(26, 122, 201);
+    background: transparent;
+    border:1px solid  rgba(255, 255, 255, 0.2);
+    font-size: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 12px 0;
+
+}
+div>select option{
+background-color:#243b55;
+color:rgb(26, 122, 201);
+border:1px solid  rgba(255, 255, 255, 0.2);
+    font-size: 16px;
+    border-radius: 8px;
+
+}
+
+    </style>
 </head>
 <body>
-<form th:method="PATCH" th:action="@{/admin/departments/{id}(id=${department.getId()})}" th:object="${department}">
-    <label for="nameSh">Введите аббривиатуру кафедры</label>
-    <input type="text" th:field="*{nameSh}" id="nameSh">
-    <label for="nameL">Введите полное название кафедры</label>
-    <input type="text" th:field="*{nameL}" id="nameL">
-    <select th:field="*{primaryFaculty}">
+<form class="login-form" th:method="PATCH" th:action="@{/admin/departments/{id}(id=${department.getId()})}" th:object="${department}">
+    <h1>Форма редактирования кафедры</h1>
+    <div class="form-input-material">
+        <input type="text" th:field="*{nameSh}" placeholder="Введите аббревиатуру" autocomplete="off" class="form-control-material" required />
+    </div>
+    <div class="form-input-material">
+        <input type="text" th:field="*{nameL}" placeholder="Введите полное название" autocomplete="off" class="form-control-material" required />
+    </div>
+    <div>
+        <select th:field="*{primaryFaculty}">
 
-        <option th:each="faculty : ${faculties}"
-                th:value="${faculty.getId()}"
-                th:text="${faculty.getNameSh()}"/>
-    </select>
-    <input type="submit" value="Изменить">
+            <option th:each="faculty : ${faculties}"
+                    th:value="${faculty.getId()}"
+                    th:text="${faculty.getNameSh()}"/>
+        </select>
+    </div>
+
+
+    <input class="btn btn-primary btn-ghost" type="submit" value="Изменить">
 
 </form>
 </body>
