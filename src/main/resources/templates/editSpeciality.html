@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Изменение специальности</title>
+    <link  type="text/css" rel="stylesheet" th:href="@{/css/FormFacultyStyle.css}"/>
+    <style>
+        div>select{
+ padding: 5px 50px;
+    color:rgb(26, 122, 201);
+    background: transparent;
+    border:1px solid  rgba(255, 255, 255, 0.2);
+    font-size: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 12px 0;
+
+}
+div>select option{
+background-color:#243b55;
+color:rgb(26, 122, 201);
+border:1px solid  rgba(255, 255, 255, 0.2);
+    font-size: 16px;
+    border-radius: 8px;
+
+}
+
+    </style>
+</head>
+<body>
+<form class="login-form" th:method="PATCH" th:action="@{/admin/specialities/{id}(id=${speciality.getId()})}" th:object="${speciality}">
+    <h1>Форма редактирования специальности</h1>
+    <div class="form-input-material">
+        <input type="text" th:field="*{nameSh}" placeholder="Введите аббревиатуру" autocomplete="off" class="form-control-material" required />
+    </div>
+    <div class="form-input-material">
+        <input type="text" th:field="*{nameL}" placeholder="Введите полное название" autocomplete="off" class="form-control-material" required />
+    </div>
+    <div>
+        <select th:field="*{primaryDepartment}">
+
+            <option th:each="department : ${departments}"
+                    th:value="${department.getId()}"
+                    th:text="${department.getNameSh()}"/>
+        </select>
+    </div>
+
+
+    <input class="btn btn-primary btn-ghost" type="submit" value="Изменить">
+
+</form>
+</body>
+</html>
