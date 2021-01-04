@@ -30,15 +30,12 @@ border:1px solid  rgba(255, 255, 255, 0.2);
 </head>
 <body>
 
-<form class="login-form" th:method="POST" th:action="@{/admin/groups}" th:object="${group}" enctype="multipart/form-data">
+<form class="login-form" th:method="POST" th:action="@{/admin/groups}" th:object="${group}">
     <h1>Форма создания группы</h1>
     <div class="form-input-material">
         <input type="text" th:field="*{nameSh}" placeholder="Введите название группы" autocomplete="off" class="form-control-material" required />
     </div>
-    <p th:text="${message}" th:if="${message ne null}"></p>
-    <div class="form-input-material">
- <input type="file" name="file"  class="form-control-material" required />
-    </div>
+
     <div>
         <select th:field="*{primarySpeciality}">
 

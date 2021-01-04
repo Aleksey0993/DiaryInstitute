@@ -212,26 +212,8 @@ public class AdminController {
     }
 
     @PostMapping("/groups")
-    public String createGroup(@ModelAttribute("group") Group group,
-                              @RequestParam("file") MultipartFile file,
-                              RedirectAttributes attributes){
-
-        if (file.isEmpty()) {
-            attributes.addFlashAttribute("message", "Please select a file to upload.");
-            return "redirect:/groups/new";
-        }
-
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        group.setNameFile(fileName);
-
-        // save the file on the local file system
-        try {
-            Path path = Paths.get(UPLOAD_DIR + fileName);
-            Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    public String createGroup(@ModelAttribute("group") Group group){
+        group.setNameFile("default_null");
         serviceG.createGroup(group);
         return "redirect:/admin/groups";
     }
@@ -247,12 +229,19 @@ public class AdminController {
         return "editGroup";
     }
     @PatchMapping("/groups/{id}") //
-    public String updateGroup(@ModelAttribute("group") Group group,
+    public String updateGroup(@ModelAttribute("group") Group group){
+
+
+        serviceG.editGroup(group);
+
+        return "redirect:/admin/groups";
+    }
+
+    @PatchMapping("/groups/timetable/{id}") //
+    public String updateGroupTimetable(@ModelAttribute("group") Group group,
                               @RequestParam(value = "file", required = false) MultipartFile file,
                               RedirectAttributes attributes){
 
-        if (!file.isEmpty()) {
-            new File(UPLOAD_DIR+group.getNameFile()).delete();
             String fileName = StringUtils.cleanPath(file.getOriginalFilename());
             group.setNameFile(fileName);
 
@@ -263,12 +252,20 @@ public class AdminController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+
 
         serviceG.editGroup(group);
 
         return "redirect:/admin/groups";
     }
+
+
+
+
+
+
+
+
 
     @DeleteMapping("/groups/{id}")
     public String deleteGroup(@PathVariable("id") Long id){

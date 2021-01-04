@@ -29,20 +29,16 @@ border:1px solid  rgba(255, 255, 255, 0.2);
     </style>
 </head>
 <body>
-<form class="login-form" th:method="PATCH" th:action="@{/admin/groups/{id}(id=${group.getId()})}" th:object="${group}" enctype="multipart/form-data">
+<form class="login-form" th:method="PATCH" th:action="@{/admin/groups/{id}(id=${group.getId()})}" th:object="${group}">
     <h1>Форма редактирования группы</h1>
     <div class="form-input-material">
         <input type="text" th:field="*{nameSh}" placeholder="Введите название группы" autocomplete="off" class="form-control-material" required />
     </div>
-    <div>
-        <label for="currentFile">Текущий файл расписания </label>
-        <input type="text" th:field="*{nameFile}" id="currentFile"  class="form-control-material" required />
+    <div hidden>
+
+        <input type="text" th:field="*{nameFile}"   class="form-control-material" required />
     </div>
-    <p th:text="${message}" th:if="${message ne null}"></p>
-    <div class="form-input-material">
-        <input type="file" name="file"  class="form-control-material" required />
-    </div>
-    <div>
+   <div>
         <select th:field="*{primarySpeciality}">
 
             <option th:each="speciality : ${specialities}"
@@ -55,5 +51,31 @@ border:1px solid  rgba(255, 255, 255, 0.2);
     <input class="btn btn-primary btn-ghost" type="submit" value="Изменить">
 
 </form>
+
+<form class="login-form" th:method="PATCH" th:action="@{/admin/groups/timetable/{id}(id=${group.getId()})}" th:object="${group}" enctype="multipart/form-data">
+    <h1>Форма редактирования расписания</h1>
+    <div class="form-input-material" hidden>
+        <input type="text" th:field="*{nameSh}" placeholder="Введите название группы" autocomplete="off" class="form-control-material" required />
+    </div>
+    <div>
+        <label for="currentfile">Текущий файл расписания</label>
+        <input type="text" th:field="*{nameFile}" id="currentfile"  class="form-control-material" required />
+    </div>
+    <p th:text="${message}" th:if="${message ne null}"></p>
+    <div class="form-input-material">
+        <input type="file" name="file"  class="form-control-material" required />
+    </div>
+    <div hidden>
+        <select th:field="*{primarySpeciality}">
+
+            <option th:each="speciality : ${specialities}"
+                    th:value="${speciality.getId()}"
+                    th:text="${speciality.getNameSh()}"/>
+        </select>
+    </div>
+    <input class="btn btn-primary btn-ghost" type="submit" value="Изменить">
+
+</form>
+
 </body>
 </html>
