@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Создание новой специальности</title>
+    <title>Создание новой группы</title>
     <link rel="stylesheet" href="/css/FormFacultyStyle.css">
     <style>
         div>select{
@@ -30,20 +30,21 @@ border:1px solid  rgba(255, 255, 255, 0.2);
 </head>
 <body>
 
-<form class="login-form" th:method="POST" th:action="@{/admin/specialities}" th:object="${speciality}">
-    <h1>Форма создания специальности</h1>
+<form class="login-form" th:method="POST" th:action="@{/admin/groups}" th:object="${group}" enctype="multipart/form-data">
+    <h1>Форма создания группы</h1>
     <div class="form-input-material">
-        <input type="text" th:field="*{nameSh}" placeholder="Введите аббревиатуру" autocomplete="off" class="form-control-material" required />
+        <input type="text" th:field="*{nameSh}" placeholder="Введите название группы" autocomplete="off" class="form-control-material" required />
     </div>
+    <p th:text="${message}" th:if="${message ne null}"></p>
     <div class="form-input-material">
-        <input type="text" th:field="*{nameL}" placeholder="Введите полное название" autocomplete="off" class="form-control-material" required />
+ <input type="file" name="file"  class="form-control-material" required />
     </div>
     <div>
-        <select th:field="*{primaryDepartment}">
+        <select th:field="*{primarySpeciality}">
 
-            <option th:each="department : ${departments}"
-                    th:value="${department.getId()}"
-                    th:text="${department.getNameSh()}"/>
+            <option th:each="speciality : ${specialities}"
+                    th:value="${speciality.getId()}"
+                    th:text="${speciality.getNameSh()}"/>
         </select>
     </div>
 
