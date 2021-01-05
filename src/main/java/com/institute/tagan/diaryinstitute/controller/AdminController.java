@@ -1,13 +1,7 @@
 package com.institute.tagan.diaryinstitute.controller;
 
-import com.institute.tagan.diaryinstitute.model.Department;
-import com.institute.tagan.diaryinstitute.model.Faculty;
-import com.institute.tagan.diaryinstitute.model.Group;
-import com.institute.tagan.diaryinstitute.model.Speciality;
-import com.institute.tagan.diaryinstitute.service.DepartmentService;
-import com.institute.tagan.diaryinstitute.service.FacultyService;
-import com.institute.tagan.diaryinstitute.service.GroupService;
-import com.institute.tagan.diaryinstitute.service.SpecialityService;
+import com.institute.tagan.diaryinstitute.model.*;
+import com.institute.tagan.diaryinstitute.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -44,6 +38,9 @@ public class AdminController {
     // Внедрение сервиса при работе с сущностью группа
     @Autowired
     private GroupService serviceG;
+    // Внедрение сервиса при работе с сущностью студент
+    @Autowired
+    private StudentService serviceSt;
     @GetMapping()
     public String  admin_main( Model model) {
         /*
@@ -259,14 +256,6 @@ public class AdminController {
         return "redirect:/admin/groups";
     }
 
-
-
-
-
-
-
-
-
     @DeleteMapping("/groups/{id}")
     public String deleteGroup(@PathVariable("id") Long id){
         String fileName="";
@@ -287,6 +276,50 @@ public class AdminController {
     /// Конец работы со страницей группы
 
 
+    ////////// Начало работы со страницей студенты
+    @GetMapping("/students")
+    public String students(Model model){
+        model.addAttribute("students", serviceSt.getAllStudents());
 
+        return "student";
+    }
+
+    @GetMapping("/students/new")
+    public String newStudent(@ModelAttribute("student") Student student, Model model){
+        model.addAttribute("groups", serviceG.getAllGroups());
+        return "newStudent";
+    }
+
+    @PostMapping("/students")
+    public String createStudent(@ModelAttribute("student") Student student){
+
+        serviceSt.createStudent(student);
+        return "redirect:/admin/students";
+    }
+
+    @GetMapping("/students/{id}/edit")
+    public String editStudents(@PathVariable("id") Long id, Model model){
+        model.addAttribute("groups", serviceG.getAllGroups());
+        Optional<Student> st = serviceSt.getStudent(id);
+        if(st.isPresent()) {
+
+            model.addAttribute("student", st.get());
+        }
+        return "editStudent";
+    }
+    @PatchMapping("/students/{id}") //
+    public String updateStudent(@ModelAttribute("student") Student student){
+        serviceSt.editStudent(student);
+
+        return "redirect:/admin/students";
+    }
+
+    @DeleteMapping("/students/{id}")
+    public String deleteStudent(@PathVariable("id") Long id){
+        serviceSt.deleteStudent(id);
+        return "redirect:/admin/students";
+    }
+    /////////////////////////////////////////////////////////
+    /// Конец работы со страницей студенты
 
 }

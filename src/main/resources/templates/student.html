@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Студенты</title>
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/style_header.css">
+    <link  type="text/css" rel="stylesheet" th:href="@{/css/style_faculties.css}"/>
+    <style>
+    .menu ul li:nth-child(4){
+    border-bottom: 1px solid rgb(26, 122, 201);
+  }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="container">
+
+
+    <main>
+
+        <h1>Студенты института</h1>
+        <div class="parent_card">
+            <div class="card" th:each="student : ${students}">
+                <p th:text="${student.getSurname()}"></p>
+                <p th:text="${student.getName()}"></p>
+                <p th:text="${student.getPatronymic()}"></p>
+
+                <div class="edit_block">
+                    <a class="edit_faculty" th:href="@{/admin/students/{id}/edit (id=${student.getId()})}"> Редактировать</a>
+                    <form  class="form_delete" th:method="DELETE" th:action="@{/admin/students/{id} (id=${student.getId()})}">
+                        <input type="submit" value="Удалить">
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+
+    </main>
+    <a href="/admin/students/new" class="add_but">Добавить студента</a>
+</div>
+</body>
+</html>

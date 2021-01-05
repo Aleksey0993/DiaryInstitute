@@ -1,6 +1,8 @@
 package com.institute.tagan.diaryinstitute.model;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name="groupSt")
@@ -19,6 +21,9 @@ public class Group {
     @JoinColumn(name = "speciality_id")
     private Speciality primarySpeciality;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "group_id")
+    private Collection<Student> students;
 
 
     public Group(){}
