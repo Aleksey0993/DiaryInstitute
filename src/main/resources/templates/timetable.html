@@ -13,5 +13,11 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"/>
+<h1>Расписание занятий</h1>
+<form th:method="GET" th:action="@{/timetable/download}">
+    <input type="text" placeholder="Номер группы" name="numGroup">
+    <button type="submit">Скачать расписание</button>
+</form>
+
 </body>
 </html>

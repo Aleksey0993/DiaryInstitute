@@ -32,10 +32,16 @@ public class GroupServiceImpl implements GroupService{
     @Override
     public List getAllGroups() {
         return groupRepository.findAll(Sort.by("id"));
+
     }
 
     @Override
     public void editGroup(Group group) {
          groupRepository.save(group);
+    }
+
+    @Override
+    public String findFile(String name) {
+        return groupRepository.findFileName(name);
     }
 }
