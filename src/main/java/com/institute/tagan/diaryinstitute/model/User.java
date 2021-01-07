@@ -2,10 +2,12 @@ package com.institute.tagan.diaryinstitute.model;
 
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,13 +17,24 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name="surname")
+    private String surname;
+    @Column(name="name")
+    private String name;
+    @Column(name="patronymic")
+    private String patronymic;
+
     private String username;
 
     private String password;
     @Transient
     private String passwordConfirm;
-    @ManyToMany(fetch = FetchType.EAGER)
+   @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
+
+
+
+
 
     public User() {
     }
@@ -68,6 +81,8 @@ public class User implements UserDetails {
         return getRoles();
     }
 
+
+
     @Override
     public String getPassword() {
         return password;
@@ -86,10 +101,37 @@ public class User implements UserDetails {
     }
 
     public Set<Role> getRoles() {
-        return roles;
+       return roles;
+   }
+
+   public void setRoles(Set<Role> roles) {
+       this.roles = roles;
+   }
+
+    public String getSurname() {
+        return surname;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPatronymic() {
+        return patronymic;
+    }
+
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+
+
 }

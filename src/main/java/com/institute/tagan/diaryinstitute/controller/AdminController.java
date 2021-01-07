@@ -1,6 +1,7 @@
 package com.institute.tagan.diaryinstitute.controller;
 
 import com.institute.tagan.diaryinstitute.model.*;
+import com.institute.tagan.diaryinstitute.repository.RoleRepository;
 import com.institute.tagan.diaryinstitute.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -41,6 +42,11 @@ public class AdminController {
     // Внедрение сервиса при работе с сущностью студент
     @Autowired
     private StudentService serviceSt;
+
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private RoleService roleService;
     @GetMapping()
     public String  admin_main( Model model) {
         /*
@@ -321,5 +327,63 @@ public class AdminController {
     }
     /////////////////////////////////////////////////////////
     /// Конец работы со страницей студенты
+
+    ////////// Начало работы со страницей пользователи
+    @GetMapping("/users")
+    public String users(Model model){
+        model.addAttribute("users", userService.allUsers());
+
+        return "user";
+    }
+
+    @GetMapping("/users/new")
+    public String newUser(@ModelAttribute("user") User user, Model model){
+        model.addAttribute("roles", roleService.getAllRoles());
+        return "newUser";
+    }
+
+    @PostMapping("/users")
+    public String createUser(@ModelAttribute("user") User user,
+                             BindingResult bindingResult, Model model){
+
+
+        if (bindingResult.hasErrors()) {
+            return "newUser";
+        }
+        if (!user.getPassword().equals(user.getPasswordConfirm())){
+            model.addAttribute("passwordError", "Пароли не совпадают");
+            return "newUser";
+        }
+        if (!userService.saveUser(user)){
+            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
+            return "newUser";
+        }
+
+
+        return "redirect:/admin/users";
+    }
+
+    @GetMapping("/users/{id}/edit")
+    public String editUser(@PathVariable("id") Long id, Model model){
+        model.addAttribute("roles", roleService.getAllRoles());
+          User user  = userService.findUserById(id);
+         model.addAttribute("user", user);
+
+        return "editUser";
+    }
+    @PatchMapping("/users/{id}") //
+    public String updateUser(@ModelAttribute("user") User user){
+        userService.saveUser(user);
+
+        return "redirect:/admin/users";
+    }
+
+    @DeleteMapping("/users/{id}")
+    public String deleteUser(@PathVariable("id") Long id){
+        userService.deleteUser(id);
+        return "redirect:/admin/users";
+    }
+    /////////////////////////////////////////////////////////
+    /// Конец работы со страницей пользователи
 
 }

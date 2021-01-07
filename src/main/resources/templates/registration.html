@@ -20,7 +20,7 @@
         </div>
         <div>
             <input type="text" th:field="*{passwordConfirm}" placeholder="Повторите пароль" autocomplete="off" />
-
+             <p th:text="${passwordError}"></p>
         </div>
 
         <button type="submit">Зарегистрироваться</button>
