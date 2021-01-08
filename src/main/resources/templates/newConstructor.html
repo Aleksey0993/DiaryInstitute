@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создание нового журнала</title>
+    <link rel="stylesheet" href="/css/FormFacultyStyle.css">
+    <style>
+        div>select{
+ padding: 5px 50px;
+    color:rgb(26, 122, 201);
+    background: transparent;
+    border:1px solid  rgba(255, 255, 255, 0.2);
+    font-size: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 12px 0;
+
+}
+div>select option{
+background-color:#243b55;
+color:rgb(26, 122, 201);
+border:1px solid  rgba(255, 255, 255, 0.2);
+    font-size: 16px;
+    border-radius: 8px;
+
+}
+  label{
+    color:white;
+  }
+    </style>
+</head>
+<body>
+
+<form class="login-form" th:method="POST" th:action="@{/teacher}" th:object="${constructor}">
+    <h1>Форма создания журнала</h1>
+    <div class="form-input-material">
+        <label for="namesubject">Название предмета</label>
+        <input type="text" th:field="*{subject}" id="namesubject" autocomplete="off" class="form-control-material" required />
+    </div>
+    <div class="form-input-material">
+        <label for="countlab">Количество лабораторных</label>
+        <input type="text" th:field="*{lab}" id="countlab" autocomplete="off" class="form-control-material" required />
+    </div>
+    <div class="form-input-material">
+        <label for="counttest">Количество тестов</label>
+        <input type="text" th:field="*{test}" id="counttest" autocomplete="off" class="form-control-material" required />
+    </div>
+    <div class="form-input-material">
+        <label for="countcoursework">Количество курсовых</label>
+        <input type="text" th:field="*{courseWork}" id="countcoursework" autocomplete="off" class="form-control-material" required />
+    </div>
+    <div hidden>
+        <select th:field="*{primaryUser}">
+
+            <option th:value="${currentTeacher.getId()}"/>
+        </select>
+    </div>
+
+    <input class="btn btn-primary btn-ghost" type="submit" value="Создать">
+</form>
+</body>
+</html>

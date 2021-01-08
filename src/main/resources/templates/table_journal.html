@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Журнал</title>
+    <link rel="stylesheet" href="/css/style_header.css">
+    <link  type="text/css" rel="stylesheet" th:href="@{/css/style_teacher.css}"/>
+    <style>
+    .menu ul li:nth-child(4){
+    border-bottom: 1px solid rgb(26, 122, 201);
+  }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<main>
+    <form th:method="POST" th:action="@{/teacher/{id}/journal/add (id=${constructor.getId()})}">
+        <input type="text" placeholder="Номер группы" name="numGroup">
+        <button type="submit">Добавить в журнал</button>
+    </form>
+
+
+</main>
+
+</body>
+</html>

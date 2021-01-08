@@ -13,4 +13,7 @@ public interface GroupRepository extends JpaRepository<Group,Long> {
     @Transactional
     @Query("select nameFile from Group g where g.nameSh= ?1")
     public String findFileName(String nameSh);
+    @Transactional
+    @Query("select g from Group g where g.nameSh= ?1")
+    public Group getOneGroup(String nameGroup);
 }

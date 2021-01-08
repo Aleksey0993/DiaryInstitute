@@ -1,5 +1,6 @@
 package com.institute.tagan.diaryinstitute.service;
 
+import com.institute.tagan.diaryinstitute.model.Group;
 import com.institute.tagan.diaryinstitute.model.Student;
 import com.institute.tagan.diaryinstitute.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List getAllStudents() {
         return studentRepository.findAll(Sort.by("id"));
+    }
+
+    @Override
+    public List getStudentsByGroup(Group group) {
+        return studentRepository.getAllStudentByGroup(group);
     }
 
     @Override

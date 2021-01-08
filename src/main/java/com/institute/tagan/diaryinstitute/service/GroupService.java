@@ -14,4 +14,5 @@ public interface GroupService {
     List getAllGroups();
     void editGroup(Group group);
     String findFile(String name);
+    Group getGroupByName(String nameGroup);
 }

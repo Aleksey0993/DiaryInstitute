@@ -32,8 +32,13 @@ public class User implements UserDetails {
    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private List<Constructor> constructors;
 
-
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "us_id")
+    private List<Journal> journals;
 
 
     public User() {

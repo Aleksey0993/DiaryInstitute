@@ -5,10 +5,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Кабинет преподавателя</title>
+    <link rel="stylesheet" href="/css/style_header.css">
+    <link  type="text/css" rel="stylesheet" th:href="@{/css/style_teacher.css}"/>
+    <style>
+    .menu ul li:nth-child(4){
+    border-bottom: 1px solid rgb(26, 122, 201);
+  }
+    </style>
 </head>
 <body>
-<div sec:authorize="isAuthenticated()">
-    <h4><a th:href="@{/logout}">Выйти</a></h4>
-</div>
+<div th:replace="fragments/header :: header"/>
+<main>
+    <h1>Добро пожаловать <span th:text="${currentTeacher.getName()}"></span>
+                        <span th:text="${currentTeacher.getPatronymic()}"></span></h1>
+
+
+
+    <div class="parent_card">
+        <div class="card" th:each="constructor : ${constructors}">
+            <h2 th:text="${constructor.getSubject()}"></h2>
+            <div class="edit_block">
+                <a class="edit_faculty" th:href="@{/teacher/{id}/journal (id=${constructor.getId()})}"> Перейти</a>
+                <form th:method="DELETE" th:action="@{/teacher/{id} (id=${constructor.getId()})}" class="form_delete">
+                    <input type="submit" value="Удалить">
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</main>
+<a href="/teacher/new" class="add_but">Создать журнал</a>
 </body>
 </html>

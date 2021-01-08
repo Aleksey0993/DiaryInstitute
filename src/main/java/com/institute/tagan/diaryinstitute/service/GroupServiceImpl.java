@@ -44,4 +44,9 @@ public class GroupServiceImpl implements GroupService{
     public String findFile(String name) {
         return groupRepository.findFileName(name);
     }
+
+    @Override
+    public Group getGroupByName(String nameGroup) {
+        return groupRepository.getOneGroup(nameGroup);
+    }
 }
