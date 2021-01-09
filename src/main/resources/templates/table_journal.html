@@ -34,7 +34,7 @@
     <div th:each="prog : ${progress}">
         <p th:text="${prog.getFullname()}"></p>
     </div>
-    <table>
+    <table th:if="${progress != null}">
         <caption th:text="${constructor.getSubject()}"></caption>
         <tr>
             <th>№ Группы</th>
@@ -68,13 +68,6 @@
 
 
     </table>
-
-
-
-
-
-
-
 
 </main>
 

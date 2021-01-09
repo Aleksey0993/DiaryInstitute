@@ -57,6 +57,12 @@ public class TeacherController {
       Constructor constructor = constructorService.getConstructor(id);
 
       List<Journal> journals = journalService.getJournalBySubject(constructor.getSubject(),activeUser);
+       if(journals.isEmpty()){
+           model.addAttribute("constructor", constructor);
+
+           model.addAttribute("progress",null);
+           return "table_journal";
+       }
         List<Progress> progress = new ArrayList<>();
       for(Journal journal : journals){
           Group group =  studentRepository.getGroupByRBook(journal.getRbook());
