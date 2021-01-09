@@ -44,4 +44,15 @@ public class StudentServiceImpl implements StudentService {
     public void editStudent(Student student) {
        studentRepository.save(student);
     }
+
+    @Override
+    public Group getGroup(String rbook) {
+        return studentRepository.getGroupByRBook(rbook);
+    }
+
+    @Override
+    public String getFullName(String rbook) {
+        return studentRepository.getFullNameByRBook(rbook);
+    }
+
 }

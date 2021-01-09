@@ -12,5 +12,6 @@ public interface JournalService {
     Journal getJournal(Long id);
     void deleteJournal(Long id);
    List getAllJournal(User user);
+   List getJournalBySubject(String nameSubject,User user);
 }
 

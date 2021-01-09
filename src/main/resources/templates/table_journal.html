@@ -7,9 +7,15 @@
     <title>Журнал</title>
     <link rel="stylesheet" href="/css/style_header.css">
     <link  type="text/css" rel="stylesheet" th:href="@{/css/style_teacher.css}"/>
+    <link  type="text/css" rel="stylesheet" th:href="@{/css/style_table.css}"/>
     <style>
     .menu ul li:nth-child(4){
     border-bottom: 1px solid rgb(26, 122, 201);
+  }
+  table{
+   border-collapse: collapse;
+
+   border: 1px solid grey;
   }
     </style>
 </head>
@@ -20,6 +26,54 @@
         <input type="text" placeholder="Номер группы" name="numGroup">
         <button type="submit">Добавить в журнал</button>
     </form>
+
+
+    <div th:each="journal : ${journals}">
+        <p th:text="${journal.getSubject()}">value subject</p>
+    </div>
+    <div th:each="prog : ${progress}">
+        <p th:text="${prog.getFullname()}"></p>
+    </div>
+    <table>
+        <caption th:text="${constructor.getSubject()}"></caption>
+        <tr>
+            <th>№ Группы</th>
+            <th>ФИО</th>
+            <th th:if="${progress.get(0).getLab().length != 0}"
+                th:each="i : ${#numbers.sequence(1, progress.get(0).getLab().length)}"
+                th:text="'Лаб-' + ${i}"></th>
+            <th th:if="${progress.get(0).getTest().length != 0}"
+                th:each="i : ${#numbers.sequence(1, progress.get(0).getTest().length)}"
+                th:text="'Тест-' + ${i}"></th>
+            <th th:if="${progress.get(0).getCoursework().length != 0}"
+                th:each="i : ${#numbers.sequence(1, progress.get(0).getCoursework().length)}"
+                th:text="'Курсач-' + ${i}"></th>
+
+
+        </tr>
+        <tr th:each="prog : ${progress}">
+            <td th:text="${prog.getId()}" hidden>id</td>
+            <td th:text="${prog.getNgroup()}">№ группы</td>
+            <td th:text="${prog.getFullname()}"></td>
+             <td th:if="${prog.getLab().length != 0}"
+                 th:each="i : ${#numbers.sequence(1, prog.getLab().length)}"
+                 th:text="${prog.getLab()[i-1]}">0</td>
+            <td th:if="${prog.getTest().length != 0}"
+                th:each="i : ${#numbers.sequence(1, prog.getTest().length)}"
+                th:text="${prog.getTest[i-1]}">0</td>
+            <td th:if="${prog.getCoursework().length != 0}"
+                th:each="i : ${#numbers.sequence(1, prog.getCoursework().length)}"
+                th:text="${prog.getCoursework()[i-1]}">0</td>
+        </tr>
+
+
+    </table>
+
+
+
+
+
+
 
 
 </main>

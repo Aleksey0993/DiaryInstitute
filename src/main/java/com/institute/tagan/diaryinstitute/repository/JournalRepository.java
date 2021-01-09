@@ -14,4 +14,12 @@ public interface JournalRepository extends JpaRepository<Journal,Long> {
    @Transactional
     @Query("select j from Journal j where j.primaryUser=?1")
     List getAllJournalByUser(User user);
+
+    @Transactional
+    @Query("select j from Journal j where j.subject=?1 and j.primaryUser=?2")
+    List getAllJournalBySubject(String nameSubject,User user);
+
+
+
+
 }

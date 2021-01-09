@@ -15,4 +15,12 @@ public interface StudentRepository extends JpaRepository<Student,Long> {
     @Transactional
     @Query("select st from Student st where st.primaryGroup=?1")
     List getAllStudentByGroup(Group group);
+
+    @Transactional
+    @Query("select st.primaryGroup from Student st where st.rbook=?1")
+    Group getGroupByRBook(String rbook);
+
+    @Transactional
+    @Query("select st.surname, st.name, st.patronymic from Student st where st.rbook=?1")
+    String getFullNameByRBook(String rbook);
 }

@@ -37,5 +37,10 @@ public class JournalServiceImpl implements JournalService{
         return journalRepository.getAllJournalByUser(user);
     }
 
+    @Override
+    public List getJournalBySubject(String nameSubject, User user) {
+        return journalRepository.getAllJournalBySubject(nameSubject,user);
+    }
+
 }
 

@@ -13,4 +13,6 @@ public interface StudentService {
     List getAllStudents();
     List getStudentsByGroup(Group group);
     void editStudent(Student student);
+    Group getGroup(String rbook);
+    String getFullName(String rbook);
 }

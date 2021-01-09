@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -53,8 +54,26 @@ public class TeacherController {
     @GetMapping("/{id}/journal")
     public String editDepartment(@PathVariable("id") Long id, Model model,
                                  @AuthenticationPrincipal User activeUser){
-      model.addAttribute("constructor", constructorService.getConstructor(id));
+      Constructor constructor = constructorService.getConstructor(id);
 
+      List<Journal> journals = journalService.getJournalBySubject(constructor.getSubject(),activeUser);
+        List<Progress> progress = new ArrayList<>();
+      for(Journal journal : journals){
+          Group group =  studentRepository.getGroupByRBook(journal.getRbook());
+
+          progress.add(new Progress(journal.getId(),journal.getRbook(),group.getNameSh(),
+                               parseFullName(studentRepository.getFullNameByRBook(journal.getRbook())),
+                                 journal.getLab(),journal.getTest(),journal.getCourseWork()));
+
+          System.out.println(journal.getTest().length);
+      }
+
+        if (progress.get(0).getTest()!=null){
+            System.out.println("НЕ равно нулю");
+        }
+        model.addAttribute("constructor", constructor);
+        model.addAttribute("journals",journals);
+        model.addAttribute("progress",progress);
    /*   Constructor constructor = constructorService.getConstructor(id);
       if(constructor.getLab()!=0) {
           model.addAttribute("labs", constructor.getLab());
@@ -83,18 +102,23 @@ public class TeacherController {
                                              student.getRbook(),activeUser));
 
        }
+       // редирект на нужный путь @GetMapping("/{id}/journal")
         return "redirect:/teacher";
     }
- /*   @PatchMapping("/departments/{id}") //
-    public String updateDepartment(@ModelAttribute("department") Department department){
-        serviceD.editDepartment(department);
 
-        return "redirect:/admin/departments";
-    }
- */
+ // доделать правильное удаление если удалять конструктор то и все записи в журнале
     @DeleteMapping("/{id}")
     public String deleteJournal(@PathVariable("id") Long id) {
         constructorService.deleteConstructor(id);
         return "redirect:/teacher";
+    }
+
+    private String parseFullName(String str){
+        char[] newstr = str.toCharArray();
+        for(int i=0;i<newstr.length;i++){
+           if(newstr[i]==',')
+               newstr[i]=' ';
+        }
+        return new String(newstr);
     }
 }
