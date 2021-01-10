@@ -12,10 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("/teacher")
@@ -28,6 +25,7 @@ public class TeacherController {
    private StudentRepository studentRepository;
   @Autowired
   private JournalService journalService;
+
     @GetMapping()
     public String teacher(Model model, @AuthenticationPrincipal User activeUser){
         model.addAttribute("currentTeacher",activeUser);
@@ -63,7 +61,9 @@ public class TeacherController {
            model.addAttribute("progress",null);
            return "table_journal";
        }
-        List<Progress> progress = new ArrayList<>();
+        List<Progress> progress = new ArrayList<Progress>();
+
+
       for(Journal journal : journals){
           Group group =  studentRepository.getGroupByRBook(journal.getRbook());
 
@@ -71,11 +71,14 @@ public class TeacherController {
                                parseFullName(studentRepository.getFullNameByRBook(journal.getRbook())),
                                  journal.getLab(),journal.getTest(),journal.getCourseWork()));
 
-          System.out.println(journal.getTest().length);
-      }
 
-        if (progress.get(0).getTest()!=null){
-            System.out.println("НЕ равно нулю");
+
+
+
+
+
+
+
         }
         model.addAttribute("constructor", constructor);
         model.addAttribute("journals",journals);

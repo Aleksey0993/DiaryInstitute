@@ -13,5 +13,6 @@ public interface JournalService {
     void deleteJournal(Long id);
    List getAllJournal(User user);
    List getJournalBySubject(String nameSubject,User user);
+   void updateResultStudentById(Integer[] lab, Integer[] test, Integer[] coursework, Long id);
 }
 

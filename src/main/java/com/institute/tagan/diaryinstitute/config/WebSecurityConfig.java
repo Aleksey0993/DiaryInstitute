@@ -46,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/teacher/**").hasRole("USER")
                 //Доступ разрешен всем пользователей
-               .antMatchers("/","/home","/timetable/**","/progress/**","/css/**").permitAll()
+               .antMatchers("/","/home","/timetable/**","/progress/**","/css/**","/test/**").permitAll()
                 //Все остальные страницы требуют аутентификации
                 .anyRequest().authenticated()
                 .and()

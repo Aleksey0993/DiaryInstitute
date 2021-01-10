@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Spring Boot ajax example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+   </head>
+<body>
+
+
+
+
+
+
+
+
+
+
+        <form id="search-form">
+
+
+
+
+
+                    <button type="submit" id="bth-search">Search </button>
+
+
+        </form>
+
+     <a href="#" id="search">Save</a>
+
+
+
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+
+    $("#search").click(function (event) {
+
+        //stop submit the form, we will post it manually.
+        event.preventDefault();
+
+      var search = {}
+    search["username"] = 5;
+    //search["email"] = 10;
+
+    $("#btn-search").prop("disabled", true);
+
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/test",
+        data: JSON.stringify(search),
+        dataType: 'json',
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+
+            console.log("SUCCESS : ", data);
+
+        }
+
+    });
+
+    });
+
+});
+
+
+</script>
+
+</body>
+</html>

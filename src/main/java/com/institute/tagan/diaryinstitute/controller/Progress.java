@@ -1,5 +1,8 @@
 package com.institute.tagan.diaryinstitute.controller;
 
+
+
+
 public class Progress {
     private Long id;
     private String rbook;
@@ -8,6 +11,10 @@ public class Progress {
     private Integer[] lab=null;
     private Integer[] test=null;
     private Integer[] coursework=null;
+
+    public Progress() {
+    }
+
     public Progress(Long id, String rbook, String ngroup, String fullname, Integer[] lab, Integer[] test, Integer[] coursework) {
         this.id = id;
         this.rbook = rbook;

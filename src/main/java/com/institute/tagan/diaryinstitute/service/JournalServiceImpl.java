@@ -42,5 +42,10 @@ public class JournalServiceImpl implements JournalService{
         return journalRepository.getAllJournalBySubject(nameSubject,user);
     }
 
+    @Override
+    public void updateResultStudentById(Integer[] lab, Integer[] test, Integer[] coursework, Long id) {
+        journalRepository.setJournalById(lab,test,coursework,id);
+    }
+
 }
 
