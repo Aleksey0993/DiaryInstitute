@@ -240,7 +240,7 @@ public class AdminController {
         return "redirect:/admin/groups";
     }
 
-    @PatchMapping("/groups/timetable/{id}") //
+    @PostMapping("/groups/timetable/{id}") //
     public String updateGroupTimetable(@ModelAttribute("group") Group group,
                               @RequestParam(value = "file", required = false) MultipartFile file,
                               RedirectAttributes attributes){

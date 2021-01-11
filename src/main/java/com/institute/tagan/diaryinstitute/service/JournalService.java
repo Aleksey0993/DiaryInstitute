@@ -14,5 +14,6 @@ public interface JournalService {
    List getAllJournal(User user);
    List getJournalBySubject(String nameSubject,User user);
    void updateResultStudentById(Integer[] lab, Integer[] test, Integer[] coursework, Long id);
+   List getAllJournalByRBook(String numRBook);
 }
 

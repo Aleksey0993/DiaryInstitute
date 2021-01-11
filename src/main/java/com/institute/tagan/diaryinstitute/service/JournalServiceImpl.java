@@ -47,5 +47,10 @@ public class JournalServiceImpl implements JournalService{
         journalRepository.setJournalById(lab,test,coursework,id);
     }
 
+    @Override
+    public List getAllJournalByRBook(String numRBook) {
+        return journalRepository.getAllJournalBynumRBook(numRBook);
+    }
+
 }
 

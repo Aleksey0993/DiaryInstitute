@@ -13,5 +13,46 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"/>
+<h1>Успеваемость</h1>
+<form th:method="GET" th:action="@{/progress/result}">
+    <input type="text" placeholder="Номер зачетной книги" name="numRBook">
+    <button type="submit">Посмотреть успеваемость</button>
+</form>
+
+<div th:if="${journals != null}" th:each="journal : ${journals}">
+
+    <table>
+        <caption th:text="${journal.getSubject()}"></caption>
+        <tr>
+           <th th:if="${journal.getLab().length != 0}"
+                th:each="i : ${#numbers.sequence(1, journal.getLab().length)}"
+                th:text="'Лаб-' + ${i}"></th>
+            <th th:if="${journal.getTest().length != 0}"
+                th:each="i : ${#numbers.sequence(1, journal.getTest().length)}"
+                th:text="'Тест-' + ${i}"></th>
+            <th th:if="${journal.getCourseWork().length != 0}"
+                th:each="i : ${#numbers.sequence(1, journal.getCourseWork().length)}"
+                th:text="'Курсач-' + ${i}"></th>
+        </tr>
+        <tr>
+            <td th:if="${journal.getLab().length != 0}"
+                th:each="i : ${#numbers.sequence(1, journal.getLab().length)}"
+                th:text="${journal.getLab()[i-1]}">0</td>
+            <td th:if="${journal.getTest().length != 0}"
+                th:each="i : ${#numbers.sequence(1, journal.getTest().length)}"
+                th:text="${journal.getTest[i-1]}">0</td>
+            <td th:if="${journal.getCourseWork().length != 0}"
+                th:each="i : ${#numbers.sequence(1, journal.getCourseWork().length)}"
+                th:text="${journal.getCourseWork()[i-1]}">0</td>
+
+        </tr>
+
+    </table>
+</div>
+
+
+
+
+
 </body>
 </html>

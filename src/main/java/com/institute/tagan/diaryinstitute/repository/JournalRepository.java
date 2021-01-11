@@ -20,6 +20,10 @@ public interface JournalRepository extends JpaRepository<Journal,Long> {
     @Query("select j from Journal j where j.subject=?1 and j.primaryUser=?2")
     List getAllJournalBySubject(String nameSubject,User user);
 
+    @Transactional
+ @Query("select j from Journal j where j.rbook=?1")
+ List getAllJournalBynumRBook(String numRBook);
+
  @Modifying(clearAutomatically = true, flushAutomatically=true )
  @Transactional
  @Query("update Journal j set j.lab = ?1, j.test= ?2, j.courseWork= ?3 where j.id= ?4")
