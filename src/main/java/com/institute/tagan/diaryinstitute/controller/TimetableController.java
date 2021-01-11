@@ -6,6 +6,7 @@ import com.institute.tagan.diaryinstitute.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -36,8 +37,15 @@ public class TimetableController {
 
 
     @GetMapping("/download")
-    public ResponseEntity<InputStreamResource> downloadFile1(@RequestParam("numGroup") String numGroup) throws IOException {
+    public ResponseEntity<?> downloadFile1(@RequestParam("numGroup") String numGroup, Model model) throws IOException {
         String filename = groupService.findFile(numGroup);
+        System.out.println(filename);
+        if(filename==null || filename.equals("default_null")){
+            model.addAttribute("empty_file","Расписание не найдено");
+            return ResponseEntity.ok().body("Расписание не найдено");
+
+        }
+
         File file = new File(UPLOAD_DIR+filename);
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 

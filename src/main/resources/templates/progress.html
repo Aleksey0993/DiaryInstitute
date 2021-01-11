@@ -13,10 +13,11 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"/>
+<main>
 <h1>Успеваемость</h1>
 <form th:method="GET" th:action="@{/progress/result}">
     <input type="text" placeholder="Номер зачетной книги" name="numRBook">
-    <button type="submit">Посмотреть успеваемость</button>
+    <button class="btn" type="submit">Посмотреть успеваемость</button>
 </form>
 
 <div th:if="${journals != null}" th:each="journal : ${journals}">
@@ -50,7 +51,7 @@
     </table>
 </div>
 
-
+</main>
 
 
 

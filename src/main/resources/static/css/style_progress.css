@@ -2,3 +2,66 @@ body {
     min-height: 100vh;
     background: linear-gradient(#141e30, #243b55);
 }
+main{
+ display: flex;
+     flex-direction: column;
+     align-items: center;
+}
+.btn:hover {
+    border:1px solid  rgb(255, 255, 255);
+    box-shadow: 0 0 10px 5px rgba(51, 152, 219, 0.4);
+}
+.btn {
+    padding: 8px 30px;
+    color:rgb(26, 122, 201);
+    background: transparent;
+    border:1px solid  rgba(255, 255, 255, 0.2);
+    font-size: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 12px 0;
+}
+h1{
+font-size:2rem;
+color:white;
+}
+input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    border-bottom:1px solid  rgb(255, 255, 255);
+    font-size: 14px;
+    padding: 7px 0px 7px 0px;
+    width: 100%;
+    margin: 12px 0;
+
+}
+input::placeholder{
+    color:rgba(255, 255, 255, 0.671);
+}
+input:focus{
+    outline:none;
+    border: none;
+    border-bottom:1px solid rgb(26, 122, 201);
+
+}
+table{
+color:white;
+margin-top:15px;
+border:1px solid  rgb(26, 122, 201);
+border-collapse: collapse;
+}
+table caption{
+  font-size:2rem;
+}
+th{
+    border:1px solid rgb(26, 122, 201);
+    text-align: center;
+    padding:10px;
+}
+td{
+    text-align: center;
+    border:1px solid rgb(26, 122, 201);
+    padding: 5px 0px;
+}
