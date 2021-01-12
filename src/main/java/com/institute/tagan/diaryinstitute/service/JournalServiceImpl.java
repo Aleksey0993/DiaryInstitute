@@ -52,5 +52,15 @@ public class JournalServiceImpl implements JournalService{
         return journalRepository.getAllJournalBynumRBook(numRBook);
     }
 
+    @Override
+    public void deleteJournalByUserBySubject(User user, String subject) {
+        journalRepository.deleteJournalByIdUserBySubject(user,subject);
+    }
+
+    @Override
+    public void deleteJournalByGroup(String RBook, User user,String subject) {
+        journalRepository.deleteJournalByGroup(RBook,user,subject);
+    }
+
 }
 

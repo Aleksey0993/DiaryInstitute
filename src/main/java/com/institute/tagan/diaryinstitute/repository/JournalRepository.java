@@ -30,4 +30,17 @@ public interface JournalRepository extends JpaRepository<Journal,Long> {
  public void setJournalById(Integer[] lab, Integer[] test, Integer[] courseWork, Long id);
 
 
+ @Modifying(clearAutomatically = true, flushAutomatically=true )
+ @Transactional
+ @Query("delete from Journal j where j.primaryUser=?1 and j.subject=?2")
+ public void deleteJournalByIdUserBySubject(User user, String subject);
+
+ @Modifying(clearAutomatically = true, flushAutomatically=true )
+ @Transactional
+ @Query("delete from Journal j where j.rbook=?1 and j.primaryUser=?2 and j.subject=?3")
+ public void deleteJournalByGroup(String RBook,User user,String subject);
+
+
+
+
 }

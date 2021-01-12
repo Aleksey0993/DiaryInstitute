@@ -5,6 +5,7 @@ import com.institute.tagan.diaryinstitute.repository.StudentRepository;
 import com.institute.tagan.diaryinstitute.service.ConstructorService;
 import com.institute.tagan.diaryinstitute.service.GroupService;
 import com.institute.tagan.diaryinstitute.service.JournalService;
+import com.institute.tagan.diaryinstitute.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +23,7 @@ public class TeacherController {
    @Autowired
    private GroupService groupService;
    @Autowired
-   private StudentRepository studentRepository;
+   private StudentService studentService;
   @Autowired
   private JournalService journalService;
 
@@ -65,17 +66,14 @@ public class TeacherController {
 
 
       for(Journal journal : journals){
-          Group group =  studentRepository.getGroupByRBook(journal.getRbook());
+          System.out.println("Номер зачетной книги");
+          System.out.println(journal.getRbook());
+          Group group = studentService.getGroup(journal.getRbook());
+          System.out.println(group);
 
           progress.add(new Progress(journal.getId(),journal.getRbook(),group.getNameSh(),
-                               parseFullName(studentRepository.getFullNameByRBook(journal.getRbook())),
+                               parseFullName(studentService.getFullName(journal.getRbook())),
                                  journal.getLab(),journal.getTest(),journal.getCourseWork()));
-
-
-
-
-
-
 
 
 
@@ -103,7 +101,7 @@ public class TeacherController {
                            @AuthenticationPrincipal User activeUser){
         Constructor constructor = constructorService.getConstructor(id);
         Group group = groupService.getGroupByName(numGroup);
-        List<Student> students = (List)studentRepository.getAllStudentByGroup(group);
+        List<Student> students = (List)studentService.getStudentsByGroup(group);
        for(Student student:students) {
 
     journalService.createJournal(new Journal(constructor.getSubject(),constructor.getLab(),
@@ -111,13 +109,43 @@ public class TeacherController {
                                              student.getRbook(),activeUser));
 
        }
-       // редирект на нужный путь @GetMapping("/{id}/journal")
-        return "redirect:/teacher";
+
+        return "redirect:/teacher/"+id+"/journal";
     }
 
- // доделать правильное удаление если удалять конструктор то и все записи в журнале
+
+    @PostMapping("{id}/journal/delete")
+    public String deleteGroup(@PathVariable("id") Long id,
+                           @RequestParam("numGroup") String numGroup,
+                           @AuthenticationPrincipal User activeUser){
+        Constructor constructor = constructorService.getConstructor(id);
+
+        Group group = groupService.getGroupByName(numGroup);
+        List<Student> students = studentService.getStudentsByGroup(group);
+        for(Student student :students){
+
+            journalService.deleteJournalByGroup(student.getRbook(),
+                                                constructor.getPrimaryUser(),
+                                                constructor.getSubject());
+
+        }
+
+
+        return "redirect:/teacher/"+id+"/journal";
+    }
+
+
+
+
+
+
     @DeleteMapping("/{id}")
     public String deleteJournal(@PathVariable("id") Long id) {
+        Constructor constructor = constructorService.getConstructor(id);
+
+        journalService.deleteJournalByUserBySubject(constructor.getPrimaryUser(),
+                                                    constructor.getSubject());
+
         constructorService.deleteConstructor(id);
         return "redirect:/teacher";
     }

@@ -33,16 +33,13 @@
 <main>
     <form th:method="POST" th:action="@{/teacher/{id}/journal/add (id=${constructor.getId()})}">
         <input type="text" placeholder="Номер группы" name="numGroup">
-        <button type="submit">Добавить в журнал</button>
+        <button class="btn" type="submit">Добавить в журнал</button>
+    </form>
+    <form th:method="POST" th:action="@{/teacher/{id}/journal/delete (id=${constructor.getId()})}">
+        <input type="text" placeholder="Номер группы" name="numGroup">
+        <button class="btn" type="submit">Удалить из журнала</button>
     </form>
 
-
-    <div th:each="journal : ${journals}">
-        <p th:text="${journal.getSubject()}">value subject</p>
-    </div>
-    <div th:each="prog : ${progress}">
-        <p th:text="${prog.getFullname()}"></p>
-    </div>
 
 
     <table th:if="${progress != null}" id="table_progress" >
