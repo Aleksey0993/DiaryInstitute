@@ -92,7 +92,8 @@ public class Journal {
         if(lab==0){
          this.lab=null;
         }
-        else {
+
+        else if(lab>0) {
             this.lab= new Integer[lab];
           for(int i=0;i<lab;i++){
             this.lab[i]=0;
@@ -102,7 +103,7 @@ public class Journal {
         if(test==0){
             this.test=null;
         }
-        else{
+        else if(test>0){
             this.test= new Integer[test];
             for(int i=0;i<test;i++){
                 this.test[i]=0;
@@ -112,7 +113,7 @@ public class Journal {
 
            this.courseWork=null;
        }
-       else {
+       else if(courseWork>0){
            this.courseWork= new Integer[courseWork];
            for (int i = 0; i < courseWork; i++) {
                this.courseWork[i] = 0;

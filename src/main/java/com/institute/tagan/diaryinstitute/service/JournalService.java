@@ -12,7 +12,7 @@ public interface JournalService {
     Journal getJournal(Long id);
     void deleteJournal(Long id);
    List getAllJournal(User user);
-   List getJournalBySubject(String nameSubject,User user);
+   List getJournalBySubject(String nameSubject,long us);
    void updateResultStudentById(Integer[] lab, Integer[] test, Integer[] coursework, Long id);
    List getAllJournalByRBook(String numRBook);
    void deleteJournalByUserBySubject(User user, String subject);

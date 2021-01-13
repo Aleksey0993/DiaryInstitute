@@ -38,8 +38,8 @@ public class JournalServiceImpl implements JournalService{
     }
 
     @Override
-    public List getJournalBySubject(String nameSubject, User user) {
-        return journalRepository.getAllJournalBySubject(nameSubject,user);
+    public List getJournalBySubject(String nameSubject, long us) {
+        return journalRepository.getAllJournalBySubject(nameSubject,us);
     }
 
     @Override

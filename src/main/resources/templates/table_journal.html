@@ -42,40 +42,57 @@
 
 
 
-    <table th:if="${progress != null}" id="table_progress" >
+
+
+    <table th:if="${progress != null}" id="table_progress">
+
         <caption th:text="${constructor.getSubject()}"></caption>
-        <tr>
-            <th>№ Группы</th>
-            <th>ФИО</th>
-            <th th:if="${progress.get(0).getLab().length != 0}"
-                th:each="i : ${#numbers.sequence(1, progress.get(0).getLab().length)}"
-                th:text="'Лаб-' + ${i}"></th>
-            <th th:if="${progress.get(0).getTest().length != 0}"
-                th:each="i : ${#numbers.sequence(1, progress.get(0).getTest().length)}"
-                th:text="'Тест-' + ${i}"></th>
-            <th th:if="${progress.get(0).getCoursework().length != 0}"
-                th:each="i : ${#numbers.sequence(1, progress.get(0).getCoursework().length)}"
-                th:text="'Курсач-' + ${i}"></th>
 
 
-        </tr>
+
+
+
+
+
+
+
         <tr th:each="prog : ${progress}">
-            <td th:text="${prog.getId()}" hidden>id</td>
-            <td th:text="${prog.getNgroup()}">№ группы</td>
-            <td th:text="${prog.getFullname()}"></td>
-            <td contenteditable="true" th:if="${prog.getLab().length != 0}"
-                th:each="i : ${#numbers.sequence(1, prog.getLab().length)}"
-                th:text="${prog.getLab()[i-1]}">0</td>
-            <td contenteditable="true" th:if="${prog.getTest().length != 0}"
-                th:each="i : ${#numbers.sequence(1, prog.getTest().length)}"
-                th:text="${prog.getTest[i-1]}">0</td>
-            <td contenteditable="true" th:if="${prog.getCoursework().length != 0}"
-                th:each="i : ${#numbers.sequence(1, prog.getCoursework().length)}"
-                th:text="${prog.getCoursework()[i-1]}">0</td>
-              <td><a href="#" class="updateP">Save</a></td>
+
+
+
+                <td th:each="elem : ${prog.getLab()}"
+                    th:text="${elem}">
+
+                </td>
+
+
+
+
+
+
+                <td th:each="elem : ${prog.getTest()}"
+                    th:text="${elem}">
+
+                </td>
+
+
+
+
+                <td th:each="elem : ${prog.getCoursework()}"
+                    th:text="${elem}">
+
+                </td>
+
+
+
+
+
         </tr>
+
+
 
     </table>
+
 
 
 

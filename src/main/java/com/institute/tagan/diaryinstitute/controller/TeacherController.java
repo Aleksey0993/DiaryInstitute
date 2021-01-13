@@ -45,7 +45,10 @@ public class TeacherController {
 
     @PostMapping()
     public String createJournal(@ModelAttribute("constructor") Constructor constructor){
-
+        System.out.println("////////////////////////////////////");
+        System.out.println(constructor.getLab());
+        System.out.println(constructor.getTest());
+        System.out.println(constructor.getCourseWork());
         constructorService.createConstructor(constructor);
         return "redirect:/teacher";
     }
@@ -55,7 +58,7 @@ public class TeacherController {
                                  @AuthenticationPrincipal User activeUser){
       Constructor constructor = constructorService.getConstructor(id);
 
-      List<Journal> journals = journalService.getJournalBySubject(constructor.getSubject(),activeUser);
+      List<Journal> journals = journalService.getJournalBySubject(constructor.getSubject(),activeUser.getId());
        if(journals.isEmpty()){
            model.addAttribute("constructor", constructor);
 
@@ -64,10 +67,10 @@ public class TeacherController {
        }
         List<Progress> progress = new ArrayList<Progress>();
 
-
       for(Journal journal : journals){
-          System.out.println("Номер зачетной книги");
-          System.out.println(journal.getRbook());
+          System.out.println("Данные журнала !!!!!!!!!!_______________------------");
+          System.out.println(journal.getLab());
+
           Group group = studentService.getGroup(journal.getRbook());
           System.out.println(group);
 
@@ -78,9 +81,14 @@ public class TeacherController {
 
 
         }
+        for(Progress prog : progress){
+            System.out.println("Данные progress !!!!!!!!!!_______________------------");
+            System.out.println(prog.getLab());
+        }
         model.addAttribute("constructor", constructor);
         model.addAttribute("journals",journals);
         model.addAttribute("progress",progress);
+
    /*   Constructor constructor = constructorService.getConstructor(id);
       if(constructor.getLab()!=0) {
           model.addAttribute("labs", constructor.getLab());
@@ -101,7 +109,7 @@ public class TeacherController {
                            @AuthenticationPrincipal User activeUser){
         Constructor constructor = constructorService.getConstructor(id);
         Group group = groupService.getGroupByName(numGroup);
-        List<Student> students = (List)studentService.getStudentsByGroup(group);
+        List<Student> students = studentService.getStudentsByGroup(group);
        for(Student student:students) {
 
     journalService.createJournal(new Journal(constructor.getSubject(),constructor.getLab(),
@@ -133,9 +141,6 @@ public class TeacherController {
 
         return "redirect:/teacher/"+id+"/journal";
     }
-
-
-
 
 
 

@@ -1,16 +1,19 @@
 package com.institute.tagan.diaryinstitute.controller;
 
 
+import org.hibernate.annotations.Type;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class Progress {
     private Long id;
     private String rbook;
     private String ngroup;
     private String fullname;
-    private Integer[] lab=null;
-    private Integer[] test=null;
-    private Integer[] coursework=null;
+
+    private Integer[] lab;
+    private Integer[] test;
+    private Integer[] coursework;
 
     public Progress() {
     }
