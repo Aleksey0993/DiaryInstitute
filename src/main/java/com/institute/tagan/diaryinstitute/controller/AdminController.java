@@ -351,10 +351,12 @@ public class AdminController {
             return "newUser";
         }
         if (!user.getPassword().equals(user.getPasswordConfirm())){
+            model.addAttribute("roles", roleService.getAllRoles());
             model.addAttribute("passwordError", "Пароли не совпадают");
             return "newUser";
         }
         if (!userService.saveUser(user)){
+            model.addAttribute("roles", roleService.getAllRoles());
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "newUser";
         }
@@ -372,7 +374,16 @@ public class AdminController {
         return "editUser";
     }
     @PatchMapping("/users/{id}") //
-    public String updateUser(@ModelAttribute("user") User user){
+    public String updateUser(@ModelAttribute("user") User user,
+                             BindingResult bindingResult, Model model){
+        if (bindingResult.hasErrors()) {
+            return "editUser";
+        }
+        if (!user.getPassword().equals(user.getPasswordConfirm())){
+            model.addAttribute("roles", roleService.getAllRoles());
+            model.addAttribute("passwordError", "Пароли не совпадают");
+            return "editUser";
+        }
         userService.saveUser(user);
 
         return "redirect:/admin/users";

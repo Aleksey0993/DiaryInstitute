@@ -50,10 +50,12 @@ public class UserService implements UserDetailsService {
 
     public boolean saveUser(User user) {
         User userFromDB = userRepository.findByUsername(user.getUsername());
-
-        if (userFromDB != null) {
-            return false;
-        }
+           if(userFromDB == null){
+               return false;
+           }
+      //  if (userFromDB != null) {
+      //      return false;
+      //  }
 
        // user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));

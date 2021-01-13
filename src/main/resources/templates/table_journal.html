@@ -39,15 +39,8 @@
         <input type="text" placeholder="Номер группы" name="numGroup">
         <button class="btn" type="submit">Удалить из журнала</button>
     </form>
-
-
-
-
-
     <table th:if="${progress != null}" id="table_progress">
-
         <caption th:text="${constructor.getSubject()}"></caption>
-
         <tr>
             <th>№ Группы</th>
             <th>ФИО</th>
@@ -88,16 +81,8 @@
             </th:block>
 
             <td><a href="#" class="updateP">Save</a></td>
-
-
         </tr>
-
-
-
     </table>
-
-
-
 
 </main>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -121,16 +106,6 @@
 		//console.log('Количество лаборторных ' + countlab +' Количество тестов '+ counttest + 'курсовых - '+ countcoursework );
 	});
 });
-
-
-
-
-
-
-
-
-
-
 
     $(".updateP").click(function (event) {
 
@@ -184,7 +159,6 @@
     });
 
 });
-
 
 </script>
 

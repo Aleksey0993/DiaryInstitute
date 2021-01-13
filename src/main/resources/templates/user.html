@@ -28,7 +28,7 @@
                 <p th:text="${user.getPatronymic()}"></p>
 
                 <div class="edit_block">
-                    <a class="edit_faculty" th:href="@{/admin/users/{id}/edit (id=${user.getId()})}"> Редактировать</a>
+                    <a class="edit_faculty" th:href="@{/admin/users/{id}/edit (id=${user.getId()})}"> Сменить пароль</a>
                     <form  class="form_delete" th:method="DELETE" th:action="@{/admin/users/{id} (id=${user.getId()})}">
                         <input type="submit" value="Удалить">
                     </form>

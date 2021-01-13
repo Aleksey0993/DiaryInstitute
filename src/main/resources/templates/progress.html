@@ -25,47 +25,41 @@
     <table>
         <caption th:text="${journal.getSubject()}"></caption>
         <tr>
-           <th th:if="${journal.getLab() != null}"
-                th:each="i : ${#numbers.sequence(1, journal.getLab().length)}"
-                th:text="'Лаб-' + ${i}"></th>
-            <th th:if="${journal.getTest() != null}"
-                th:each="i : ${#numbers.sequence(1, journal.getTest().length)}"
-                th:text="'Тест-' + ${i}"></th>
-            <th th:if="${journal.getCourseWork() != null}"
-                th:each="i : ${#numbers.sequence(1, journal.getCourseWork().length)}"
-                th:text="'Курсач-' + ${i}"></th>
+          <th:block th:if="${journal.getLab() != null}">
+              <th  th:each="i : ${#numbers.sequence(1, journal.getLab().length)}"
+                   th:text="'Лаб-' + ${i}"></th>
+          </th:block>
+           <th:block th:if="${journal.getTest() != null}">
+               <th th:each="i : ${#numbers.sequence(1, journal.getTest().length)}"
+                   th:text="'Тест-' + ${i}"></th>
+           </th:block>
+            <th:block th:if="${journal.getCourseWork() != null}">
+                <th th:each="i : ${#numbers.sequence(1, journal.getCourseWork().length)}"
+                    th:text="'Курсач-' + ${i}"></th>
+
+            </th:block>
+
         </tr>
 
-
         <tr>
-
             <th:block th:if="${journal.getLab() != null}">
                 <td th:each="elem : ${journal.getLab()}"
                     th:text="${elem}">
-
                 </td>
 
             </th:block>
 
-
-
             <th:block th:if="${journal.getTest() != null}">
                 <td th:each="elem : ${journal.getTest()}"
                     th:text="${elem}">
-
                 </td>
-
             </th:block>
 
             <th:block th:if="${journal.getCourseWork() != null}">
                 <td th:each="elem : ${journal.getCourseWork()}"
                     th:text="${elem}">
-
                 </td>
-
             </th:block>
-
-
 
         </tr>
 
