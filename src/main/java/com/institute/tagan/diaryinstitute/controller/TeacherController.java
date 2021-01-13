@@ -68,6 +68,7 @@ public class TeacherController {
         List<Progress> progress = new ArrayList<Progress>();
 
       for(Journal journal : journals){
+
           System.out.println("Данные журнала !!!!!!!!!!_______________------------");
           System.out.println(journal.getLab());
 

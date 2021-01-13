@@ -62,5 +62,10 @@ public class JournalServiceImpl implements JournalService{
         journalRepository.deleteJournalByGroup(RBook,user,subject);
     }
 
+    @Override
+    public Integer[] getLab(long id) {
+        return journalRepository.getJournalLab(id);
+    }
+
 }
 

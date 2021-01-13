@@ -42,6 +42,7 @@ public class UpdateController {
             index=0;
             for(int i=lab.length+test.length;i<coursework.length+lab.length+test.length;i++){
                 coursework[index]=result.getResult()[i];
+                index++;
             }
         }
 

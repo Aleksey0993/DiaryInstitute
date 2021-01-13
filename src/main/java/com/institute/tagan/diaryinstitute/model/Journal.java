@@ -1,11 +1,19 @@
 
 package com.institute.tagan.diaryinstitute.model;
 
+import com.institute.tagan.diaryinstitute.config.IntArrayUserType;
+import com.vladmihalcea.hibernate.type.array.IntArrayType;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
 
 @Entity
+@TypeDefs({
+         @TypeDef(name="int-array", typeClass= IntArrayType.class)
+})
+
 @Table(name="journal")
 public class Journal {
 
@@ -16,14 +24,16 @@ public class Journal {
     private Long id;
     @Column(name="subject")
     private String subject;
-    @Column(name="lab")
-    @Type(type = "com.institute.tagan.diaryinstitute.config.IntArrayUserType")
+
+
+    @Type(type = "int-array")
+    @Column(name="lab", columnDefinition = "integer[]")
     private Integer[] lab;
-    @Column(name="test")
-    @Type(type = "com.institute.tagan.diaryinstitute.config.IntArrayUserType")
+    @Type(type = "int-array")
+    @Column(name="test",columnDefinition = "integer[]")
     private Integer[] test;
-    @Column(name="coursework")
-    @Type(type = "com.institute.tagan.diaryinstitute.config.IntArrayUserType")
+    @Type(type = "int-array")
+    @Column(name="coursework",columnDefinition = "integer[]")
     private Integer[] courseWork;
     @Column(name="rbook")
     private String rbook;

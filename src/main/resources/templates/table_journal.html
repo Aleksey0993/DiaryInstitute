@@ -48,43 +48,46 @@
 
         <caption th:text="${constructor.getSubject()}"></caption>
 
+        <tr>
+            <th>№ Группы</th>
+            <th>ФИО</th>
+            <th:block th:if="${constructor.getLab() != 0}">
+                <th th:each="i : ${#numbers.sequence(1, constructor.getLab())}"
+                    th:text="'Лаб-' + ${i}"></th>
+            </th:block >
+            <th:block th:if="${constructor.getTest() != 0}">
+                <th th:each="i : ${#numbers.sequence(1, constructor.getTest())}"
+                    th:text="'Тест-' + ${i}"></th>
+            </th:block>
+             <th:block th:if="${constructor.getCourseWork() != 0}">
+                 <th th:each="i : ${#numbers.sequence(1, constructor.getCourseWork())}"
+                     th:text="'Курсач-' + ${i}"></th>
+             </th:block>
 
-
-
-
-
-
-
+        </tr>
 
         <tr th:each="prog : ${progress}">
+            <td th:text="${prog.getId()}" hidden>id</td>
+            <td th:text="${prog.getNgroup()}">№ группы</td>
+            <td th:text="${prog.getFullname()}"></td>
+            <th:block th:if="${constructor.getLab() != 0}">
+             <td contenteditable="true" th:each="elem : ${prog.getLab()}"
+                 th:text="${elem}">
+             </td>
+            </th:block>
 
+            <th:block th:if="${constructor.getTest() != 0}">
+          <td  contenteditable="true" th:each="elem : ${prog.getTest()}"
+              th:text="${elem}">
+          </td>
+            </th:block>
+            <th:block th:if="${constructor.getCourseWork() != 0}">
+          <td  contenteditable="true" th:each="elem : ${prog.getCoursework()}"
+              th:text="${elem}">
+          </td>
+            </th:block>
 
-
-                <td th:each="elem : ${prog.getLab()}"
-                    th:text="${elem}">
-
-                </td>
-
-
-
-
-
-
-                <td th:each="elem : ${prog.getTest()}"
-                    th:text="${elem}">
-
-                </td>
-
-
-
-
-                <td th:each="elem : ${prog.getCoursework()}"
-                    th:text="${elem}">
-
-                </td>
-
-
-
+            <td><a href="#" class="updateP">Save</a></td>
 
 
         </tr>

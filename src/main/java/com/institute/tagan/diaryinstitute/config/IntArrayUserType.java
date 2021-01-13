@@ -1,38 +1,32 @@
 package com.institute.tagan.diaryinstitute.config;
+
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.usertype.UserType;
 
 import java.io.Serializable;
 import java.sql.*;
-public class IntArrayUserType<T extends Serializable> implements UserType {
+public class IntArrayUserType implements UserType {
 
     protected static final int[] SQL_TYPES = { Types.ARRAY };
-    private  Class<T> typeParameterClass;
-
     @Override
-    public Object assemble(Serializable cached, Object owner) throws HibernateException {
-        return this.deepCopy(cached);
+    public int[] sqlTypes() {
+        return new int[] { Types.ARRAY };
     }
 
     @Override
-    public Object deepCopy(Object value) throws HibernateException {
-        return value;
+    public Class<Integer[]> returnedClass() {
+        return Integer[].class;
     }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public Serializable disassemble(Object value) throws HibernateException {
-        return (T) this.deepCopy(value);
-    }
 
     @Override
     public boolean equals(Object x, Object y) throws HibernateException {
-
         if (x == null) {
             return y == null;
         }
         return x.equals(y);
+
     }
 
     @Override
@@ -41,30 +35,7 @@ public class IntArrayUserType<T extends Serializable> implements UserType {
     }
 
     @Override
-    public boolean isMutable() {
-        return true;
-    }
-
-
-
-    @Override
-    public Object replace(Object original, Object target, Object owner) throws HibernateException {
-        return original;
-    }
-
-    @Override
-    public Class<T> returnedClass() {
-        return typeParameterClass;
-    }
-
-    @Override
-    public int[] sqlTypes() {
-        return new int[] { Types.ARRAY };
-    }
-
-    @Override
-    public Object nullSafeGet(ResultSet resultSet, String[] names, SharedSessionContractImplementor session, Object owner)
-            throws HibernateException, SQLException {
+    public Object nullSafeGet(ResultSet resultSet, String[] names, SharedSessionContractImplementor session, Object owner) throws HibernateException, SQLException {
         if (resultSet.wasNull()) {
             return null;
         }
@@ -73,26 +44,46 @@ public class IntArrayUserType<T extends Serializable> implements UserType {
         }
 
         Array array = resultSet.getArray(names[0]);
-        @SuppressWarnings("unchecked")
-        T javaArray = (T) array.getArray();
+        Integer[] javaArray = (Integer[]) array.getArray();
         return javaArray;
+
     }
 
     @Override
-    public void nullSafeSet(PreparedStatement statement, Object value, int index, SharedSessionContractImplementor session)
-            throws HibernateException, SQLException {
-
+    public void nullSafeSet(PreparedStatement statement, Object value, int index, SharedSessionContractImplementor session) throws HibernateException, SQLException {
         Connection connection = statement.getConnection();
         if (value == null) {
             statement.setNull(index, SQL_TYPES[0]);
         } else {
-            @SuppressWarnings("unchecked")
-            T castObject = (T) value;
-            Array array = connection.createArrayOf("integer", (Object[]) castObject);
+            Integer[] castObject = (Integer[]) value;
+            Array array = connection.createArrayOf("integer", castObject);
             statement.setArray(index, array);
         }
 
     }
 
+    @Override
+    public Object deepCopy(Object value) throws HibernateException {
+        return value;
+    }
 
+    @Override
+    public boolean isMutable() {
+        return true;
+    }
+
+    @Override
+    public Serializable disassemble(Object value) throws HibernateException {
+        return (Integer[]) this.deepCopy(value);
+    }
+
+    @Override
+    public Object assemble(Serializable cached, Object owner) throws HibernateException {
+        return this.deepCopy(cached);
+    }
+
+    @Override
+    public Object replace(Object original, Object target, Object owner) throws HibernateException {
+        return original;
+    }
 }
