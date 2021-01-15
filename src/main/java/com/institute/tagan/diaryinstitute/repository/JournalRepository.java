@@ -17,7 +17,7 @@ public interface JournalRepository extends JpaRepository<Journal,Long> {
     List getAllJournalByUser(User user);
 
 
-    @Query(value = "select id,subject,lab,test,coursework,rbook,us_id from Journal j where j.subject=?1 and j.us_id=?2", nativeQuery = true)
+    @Query(value = "select * from Journal j where j.subject=?1 and j.us_id=?2 order by j.id", nativeQuery = true)
     List<Journal> getAllJournalBySubject(String nameSubject,long us);
 
  @Query(value = "select lab from Journal j where j.id=?1", nativeQuery = true)
