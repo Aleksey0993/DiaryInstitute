@@ -41,7 +41,7 @@ border:1px solid  rgba(255, 255, 255, 0.2);
 <form class="login-form" th:method="POST" th:action="@{/admin/specialities}" th:object="${speciality}">
     <h1>Форма создания специальности</h1>
     <div class="form-input-material">
-        <input type="text" th:field="*{nameSh}" placeholder="Введите аббревиатуру" autocomplete="off" class="form-control-material" required />
+        <input type="text" th:field="*{nameSh}" placeholder="Введите номер специальности" autocomplete="off" class="form-control-material" required />
     </div>
     <div class="form-input-material">
         <input type="text" th:field="*{nameL}" placeholder="Введите полное название" autocomplete="off" class="form-control-material" required />

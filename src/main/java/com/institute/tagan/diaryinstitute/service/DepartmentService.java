@@ -13,6 +13,6 @@ public interface DepartmentService {
     void deleteDepartment(Long id);
     List getAllDepartments();
     // long countFaculty();
-    void editDepartment(Department department);
+    public void editDepartmentByID(Department department, Long id);
 }
 

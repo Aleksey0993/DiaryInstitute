@@ -137,8 +137,10 @@ public class AdminController {
         return "editDepartment";
     }
     @PatchMapping("/departments/{id}") //
-    public String updateDepartment(@ModelAttribute("department") Department department){
-        serviceD.editDepartment(department);
+    public String updateDepartment(@ModelAttribute("department") Department department,
+                                   @PathVariable("id") Long id){
+        serviceD.editDepartmentByID(department,id);
+
 
         return "redirect:/admin/departments";
     }
@@ -185,8 +187,9 @@ public class AdminController {
         return "editSpeciality";
     }
     @PatchMapping("/specialities/{id}") //
-    public String updateSpeciality(@ModelAttribute("speciality") Speciality speciality){
-        serviceS.editSpeciality(speciality);
+    public String updateSpeciality(@ModelAttribute("speciality") Speciality speciality,
+                                   @PathVariable("id") Long id){
+        serviceS.editSpecialityByID(speciality,id);
 
         return "redirect:/admin/specialities";
     }
@@ -231,17 +234,18 @@ public class AdminController {
         }
         return "editGroup";
     }
-    @PatchMapping("/groups/{id}") //
-    public String updateGroup(@ModelAttribute("group") Group group){
+    @PatchMapping("/groups/{id}")
+    public String updateGroup(@ModelAttribute("group") Group group,
+                              @PathVariable("id") Long id){
 
 
-        serviceG.editGroup(group);
+        serviceG.editGroupByID(group,id);
 
         return "redirect:/admin/groups";
     }
 
     @PatchMapping("/groups/timetable/{id}") //
-    public String updateGroupTimetable(@ModelAttribute("group") Group group,
+    public String updateGroupTimetable( @PathVariable("id") Long id,@ModelAttribute("group") Group group,
                               @RequestParam(value = "file", required = false) MultipartFile file,
                               RedirectAttributes attributes){
 
@@ -257,7 +261,7 @@ public class AdminController {
             }
 
 
-        serviceG.editGroup(group);
+        serviceG.editGroupFileByID(group,id);
 
         return "redirect:/admin/groups";
     }
@@ -367,24 +371,24 @@ public class AdminController {
 
     @GetMapping("/users/{id}/edit")
     public String editUser(@PathVariable("id") Long id, Model model){
-        model.addAttribute("roles", roleService.getAllRoles());
-          User user  = userService.findUserById(id);
-         model.addAttribute("user", user);
+       model.addAttribute("id", id);
 
         return "editUser";
     }
     @PatchMapping("/users/{id}") //
-    public String updateUser(@ModelAttribute("user") User user,
-                             BindingResult bindingResult, Model model){
-        if (bindingResult.hasErrors()) {
-            return "editUser";
-        }
-        if (!user.getPassword().equals(user.getPasswordConfirm())){
-            model.addAttribute("roles", roleService.getAllRoles());
+    public String updateUser( Model model,
+                             @PathVariable("id") Long id,
+                             @RequestParam("password") String password,
+                             @RequestParam("passwordConfirm") String passwordConfirm){
+
+        if(!password.equals(passwordConfirm)){
+            model.addAttribute("id", id);
             model.addAttribute("passwordError", "Пароли не совпадают");
             return "editUser";
         }
-        userService.saveUser(user);
+
+        userService.editPasswordById(password,id);
+
 
         return "redirect:/admin/users";
     }

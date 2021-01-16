@@ -1,4 +1,5 @@
 package com.institute.tagan.diaryinstitute.service;
+import com.institute.tagan.diaryinstitute.model.Department;
 import com.institute.tagan.diaryinstitute.model.Speciality;
 
 import java.util.List;
@@ -12,5 +13,5 @@ public interface SpecialityService {
     void deleteSpeciality(Long id);
     List getAllSpecialities();
     // long countFaculty();
-    void editSpeciality(Speciality speciality);
+    public void editSpecialityByID(Speciality speciality, Long id);
 }

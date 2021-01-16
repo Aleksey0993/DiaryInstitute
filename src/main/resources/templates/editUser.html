@@ -35,35 +35,15 @@ border:1px solid  rgba(255, 255, 255, 0.2);
 
 <div th:replace="fragments/header :: header"/>
 <main>
-<form class="login-form" th:method="PATCH" th:action="@{/admin/users/{id}(id=${user.getId()})}" th:object="${user}">
+<form class="login-form" th:method="PATCH" th:action="@{/admin/users/{id}(id=${id})}">
     <h1>Форма редактирования пользовательского пароля</h1>
-    <div class="form-input-material" hidden>
-        <input type="text" th:field="*{surname}" placeholder="Введите фамилию" autocomplete="off" class="form-control-material" required />
-    </div>
-    <div class="form-input-material" hidden>
-        <input type="text" th:field="*{name}" placeholder="Введите имя" autocomplete="off" class="form-control-material" required />
-    </div>
-    <div class="form-input-material" hidden>
-        <input type="text" th:field="*{patronymic}" placeholder="Введите отчество" autocomplete="off" class="form-control-material" required />
-    </div>
-    <div class="form-input-material" hidden>
-        <input type="text" th:field="*{username}" placeholder="Введите логин" autocomplete="off" class="form-control-material" required />
 
+    <div class="form-input-material">
+        <input type="password" name="password" placeholder="Введите пароль" autocomplete="off" class="form-control-material" required />
     </div>
     <div class="form-input-material">
-        <input type="password" th:field="*{password}" placeholder="Введите пароль" autocomplete="off" class="form-control-material" required />
-    </div>
-    <div class="form-input-material">
-        <input type="password" th:field="*{passwordConfirm}" placeholder="Повторите пароль" autocomplete="off" class="form-control-material" required />
+        <input type="password" name="passwordConfirm" placeholder="Повторите пароль" autocomplete="off" class="form-control-material" required />
         <p th:text="${passwordError}"></p>
-    </div>
-    <div hidden>
-        <select th:field="*{roles}">
-
-            <option th:each="role : ${roles}"
-                    th:value="${role.getId()}"
-                    th:text="${role.getName()}"/>
-        </select>
     </div>
 
     <input class="btn btn-primary btn-ghost" type="submit" value="Изменить">

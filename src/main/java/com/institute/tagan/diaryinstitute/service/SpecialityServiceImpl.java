@@ -1,5 +1,6 @@
 package com.institute.tagan.diaryinstitute.service;
 
+import com.institute.tagan.diaryinstitute.model.Department;
 import com.institute.tagan.diaryinstitute.model.Speciality;
 import com.institute.tagan.diaryinstitute.repository.SpecialityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,10 @@ public class SpecialityServiceImpl implements SpecialityService{
         return specialityRepository.findAll(Sort.by("id"));
     }
 
+
+
     @Override
-    public void editSpeciality(Speciality speciality) {
-       specialityRepository.save(speciality);
+    public void editSpecialityByID(Speciality speciality, Long id) {
+        specialityRepository.setSpecialityById(speciality.getNameSh(), speciality.getNameL(), speciality.getPrimaryDepartment(),id);
     }
 }

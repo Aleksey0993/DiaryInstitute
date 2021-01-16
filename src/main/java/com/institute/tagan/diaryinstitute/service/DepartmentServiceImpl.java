@@ -2,6 +2,7 @@ package com.institute.tagan.diaryinstitute.service;
 
 
 import com.institute.tagan.diaryinstitute.model.Department;
+import com.institute.tagan.diaryinstitute.model.Faculty;
 import com.institute.tagan.diaryinstitute.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -36,8 +37,12 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentRepository.findAll(Sort.by("id"));
     }
 
+
+
+
     @Override
-    public void editDepartment(Department department) {
-        departmentRepository.save(department);
+    public void editDepartmentByID(Department department, Long id) {
+        departmentRepository.setDepartmentById(department.getNameSh(), department.getNameL(),department.getPrimaryFaculty(),id);
     }
+
 }

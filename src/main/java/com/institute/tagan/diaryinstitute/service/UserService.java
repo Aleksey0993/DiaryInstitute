@@ -50,7 +50,7 @@ public class UserService implements UserDetailsService {
 
     public boolean saveUser(User user) {
         User userFromDB = userRepository.findByUsername(user.getUsername());
-           if(userFromDB == null){
+           if(userFromDB != null){
                return false;
            }
       //  if (userFromDB != null) {
@@ -62,7 +62,10 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
         return true;
     }
+    public void editPasswordById(String password, Long id){
+        userRepository.editPassword(bCryptPasswordEncoder.encode(password) ,id);
 
+    }
     public boolean deleteUser(Long userId) {
         if (userRepository.findById(userId).isPresent()) {
             userRepository.deleteById(userId);

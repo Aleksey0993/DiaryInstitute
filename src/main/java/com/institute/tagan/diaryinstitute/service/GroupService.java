@@ -13,6 +13,8 @@ public interface GroupService {
    void deleteGroup(Long id);
     List getAllGroups();
     void editGroup(Group group);
+    public void editGroupByID(Group group, Long id);
     String findFile(String name);
     Group getGroupByName(String nameGroup);
+    public void editGroupFileByID(Group group, Long id);
 }

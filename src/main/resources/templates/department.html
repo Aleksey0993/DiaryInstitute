@@ -25,7 +25,7 @@
         <div class="parent_card">
             <div class="card" th:each="department : ${departments}">
                 <h2 th:text="${department.getNameSh()}"></h2>
-                <p th:text="${department.getNameSh()}"></p>
+                <p th:text="${department.getNameL()}"></p>
                 <p th:text="${department.getPrimaryFaculty().getNameSh()}"></p>
                 <div class="edit_block">
                 <a class="edit_faculty" th:href="@{/admin/departments/{id}/edit (id=${department.getId()})}"> Редактировать</a>

@@ -41,6 +41,11 @@ public class GroupServiceImpl implements GroupService{
     }
 
     @Override
+    public void editGroupByID(Group group, Long id) {
+        groupRepository.setGroupById(group.getNameSh(),group.getPrimarySpeciality(),id);
+    }
+
+    @Override
     public String findFile(String name) {
         return groupRepository.findFileName(name);
     }
@@ -48,5 +53,10 @@ public class GroupServiceImpl implements GroupService{
     @Override
     public Group getGroupByName(String nameGroup) {
         return groupRepository.getOneGroup(nameGroup);
+    }
+
+    @Override
+    public void editGroupFileByID(Group group, Long id) {
+        groupRepository.setGroupFileById(group.getNameFile(),id);
     }
 }
