@@ -3,11 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Редектирование факультета факультета</title>
+    <title>Редектирование факультета</title>
     <link  type="text/css" rel="stylesheet" th:href="@{/css/FormFacultyStyle.css}"/>
+
+    <link rel="stylesheet" href="/css/style_header.css">
+    <style>
+    .menu ul li:nth-child(4){
+    border-bottom: 1px solid rgb(26, 122, 201);
+  }
+ </style>
 </head>
 <body>
 
+
+<div th:replace="fragments/header :: header"/>
+
+
+
+
+
+
+
+<main>
 <form class="login-form" th:method="PATCH" th:action="@{/admin/faculties/{id}(id=${faculty.getId()})}" th:object="${faculty}">
     <h1>Форма редактирования факультета</h1>
     <div class="form-input-material">
@@ -23,6 +40,6 @@
 
 
 
-
+</main>
 </body>
 </html>

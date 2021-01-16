@@ -5,9 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Создание нового факультета</title>
     <link rel="stylesheet" href="/css/FormFacultyStyle.css">
+    <link rel="stylesheet" href="/css/style_header.css">
+    <style>
+    .menu ul li:nth-child(4){
+    border-bottom: 1px solid rgb(26, 122, 201);
+  }
+    </style>
 </head>
 <body>
-
+<div th:replace="fragments/header :: header"/>
+<main>
   <form class="login-form" th:method="POST" th:action="@{/admin/faculties}" th:object="${faculty}">
       <h1>Форма создания факультета</h1>
       <div class="form-input-material">
@@ -20,9 +27,7 @@
       </div>
       <button type="submit" class="btn btn-primary btn-ghost">Создать</button>
   </form>
-
-
-
+</main>
 
 
 </body>
